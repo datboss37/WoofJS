@@ -1,514 +1,166 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Woof by stevekrouse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Woof</h1>
-      <h2 class="project-tagline">JavaScript Unleashed</h2>
-      <a href="https://github.com/stevekrouse/WoofJS" class="btn">View on GitHub</a>
-      <a href="https://github.com/stevekrouse/WoofJS/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/stevekrouse/WoofJS/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
-
-    <section class="main-content">
-      <h1>
-<a id="woofjs---javascript-unleashed" class="anchor" href="#woofjs---javascript-unleashed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>WoofJS - <em>JavaScript Unleashed</em>
-</h1>
-
-<p>WoofJS is a JavaScript library for making web and mobile games and animations.</p>
-
-<p>It was originally inspired by Scratch and can help ease the trasition to JavaScript.</p>
-
-<p>WoofJS is developed with <g-emoji alias="heart" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2764.png">❤️</g-emoji> by <a href="http://thecodingspace.com">The Coding Space</a>.</p>
-
-<p><b>Notice</b>: <em>This is new software and is under rapid development, so expect things to break and be frequently changed. We expect our first stable release will come out by the end of Summer 2016. Until our first stable release, this software <b>only runs on desktop Chrome</b>, at which point we will support all modern desktop and mobile browsers.</em></p>
-
-<h2>
-<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h2>
-
-<p>You can either <a href="https://jsbin.com/lekovu/edit?js,output">clone this JSBin</a> or follow the steps below to setup your first WoofJS project.</p>
-
-<p>1) Throw the Woof library between the <code>&lt;head&gt;</code> tags.</p>
-
-<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://cdn.rawgit.com/stevekrouse/WoofJS/aa1cfdc721003716db0b6781849dbb40160a434e/woof.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
-
-<p>2) Throw in some JavaScript, and tell Woof to fetch it.</p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> project <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Woof.Project</span>({fullScreen<span class="pl-k">:</span> <span class="pl-c1">true</span>, debug<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">"</span>project.keysDown<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>project.mouseX<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>project.mouseY<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>timer<span class="pl-pds">"</span></span>]}); 
-<span class="pl-c">// Set the backdrop URL (preferably of similar dimensions to your canvas)</span>
-<span class="pl-smi">project</span>.<span class="pl-en">setBackdropURL</span>(<span class="pl-s"><span class="pl-pds">"</span>http://efdreams.com/data_images/dreams/sky/sky-05.jpg<span class="pl-pds">"</span></span>);
-
-<span class="pl-c">// Add an image via a url, and optionally setting its x and y</span>
-<span class="pl-k">var</span> rectangle <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addImage</span>({url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://www.urdu-english.com/images/lessons/beginner/shapes/shapes-pics/rectangle.png<span class="pl-pds">"</span></span>, x<span class="pl-k">:</span> <span class="pl-c1">0</span>, y<span class="pl-k">:</span> <span class="pl-c1">0</span>});
-
-<span class="pl-c">// Make it move with the arrow keys by checking which keys are down every 40 milliseconds</span>
-<span class="pl-smi">project</span>.<span class="pl-en">forever</span>(() <span class="pl-k">=&gt;</span> {
-  <span class="pl-k">if</span> (<span class="pl-smi">project</span>.<span class="pl-smi">keysDown</span>.<span class="pl-en">includes</span>(<span class="pl-s"><span class="pl-pds">"</span>LEFT<span class="pl-pds">"</span></span>)){
-    <span class="pl-c">// move left by 5</span>
-    <span class="pl-smi">rectangle</span>.<span class="pl-c1">x</span> <span class="pl-k">-=</span> <span class="pl-c1">5</span>; 
-  }
-  <span class="pl-k">if</span> (<span class="pl-smi">project</span>.<span class="pl-smi">keysDown</span>.<span class="pl-en">includes</span>(<span class="pl-s"><span class="pl-pds">"</span>RIGHT<span class="pl-pds">"</span></span>)){
-    <span class="pl-smi">rectangle</span>.<span class="pl-c1">x</span> <span class="pl-k">+=</span><span class="pl-c1">5</span>; 
-  }
-  <span class="pl-k">if</span> (<span class="pl-smi">project</span>.<span class="pl-smi">keysDown</span>.<span class="pl-en">includes</span>(<span class="pl-s"><span class="pl-pds">"</span>UP<span class="pl-pds">"</span></span>)){
-    <span class="pl-smi">rectangle</span>.<span class="pl-c1">y</span> <span class="pl-k">+=</span> <span class="pl-c1">5</span>; 
-  }
-  <span class="pl-k">if</span> (<span class="pl-smi">project</span>.<span class="pl-smi">keysDown</span>.<span class="pl-en">includes</span>(<span class="pl-s"><span class="pl-pds">"</span>DOWN<span class="pl-pds">"</span></span>)){
-    <span class="pl-smi">rectangle</span>.<span class="pl-c1">y</span> <span class="pl-k">-=</span> <span class="pl-c1">5</span>; 
-  }
-});
-
-<span class="pl-c">// make the timer start at 20</span>
-<span class="pl-k">var</span> timer <span class="pl-k">=</span> <span class="pl-c1">20</span>;
-<span class="pl-c">// add text that diplays the timer</span>
-<span class="pl-k">var</span> timerText <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addText</span>({x<span class="pl-k">:</span> <span class="pl-c1">0</span>, y<span class="pl-k">:</span> <span class="pl-smi">project</span>.<span class="pl-smi">maxY</span> <span class="pl-k">-</span> <span class="pl-c1">20</span>, size<span class="pl-k">:</span> <span class="pl-c1">20</span>, color<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>white<span class="pl-pds">"</span></span>});
-<span class="pl-smi">project</span>.<span class="pl-en">every</span>(<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>second<span class="pl-pds">"</span></span>, () <span class="pl-k">=&gt;</span> {
-  <span class="pl-c">// stop everything when the timer reaches 0</span>
-  <span class="pl-k">if</span> (timer <span class="pl-k">===</span> <span class="pl-c1">0</span>){ <span class="pl-smi">project</span>.<span class="pl-en">stopAll</span>(); }
-  <span class="pl-c">// make the timer go down every second</span>
-  timer<span class="pl-k">--</span>;
-  <span class="pl-c">// change the text to refer to the timer's new value every second</span>
-  <span class="pl-smi">timerText</span>.<span class="pl-c1">text</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Timer: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> timer;
-});</pre></div>
-
-<h2>
-<a id="woofproject" class="anchor" href="#woofproject" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Woof.Project</h2>
-
-<p>Create a project: </p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> project <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Woof.Project</span>({fullScreen<span class="pl-k">:</span> <span class="pl-c1">true</span>, debug<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">"</span>project.keysDown<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>project.mouseX<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>project.mouseY<span class="pl-pds">"</span></span>]});</pre></div>
-
-<ul>
-<li>Create a project with a height and width: `<code>var project = new Woof.Project({height: 500, width: 350});</code>
-</li>
-<li>Create a project with a pre-existing <code>&lt;canvas id="project"&gt;</code> element by id: `<code>var project = new Woof.Project({id: "project"});</code>
-</li>
-<li>Set/change the backdrop to an image URL: <code>project.setBackdropURL("http://example.com/img.jpg");</code>
-</li>
-<li>Set/change the backdrop to an color: <code>project.setBackdropColor("blue");</code>
-</li>
-<li>Stop all: <code>project.stopAll();</code>
-</li>
-<li>Mouse X: <code>project.mouseX</code>
-</li>
-<li>Mouse Y: <code>project.mouseY</code>
-</li>
-<li>Mouse down?: <code>project.mouseDown</code>
-</li>
-<li>Do something on click: <code>project.onClick((mouseX, mouseY) =&gt; { ... });</code>
-</li>
-<li>List of keys currently pressed: <code>project.keysDown</code>
-</li>
-<li>Is 'A' pressed?: <code>project.keysDown.includes('A')</code>
-</li>
-<li>Right edge of the screen: <code>project.maxX</code>
-</li>
-<li>Left edge of the screen: <code>project.minX</code>
-</li>
-<li>Top edge of the screen: <code>project.maxY</code>
-</li>
-<li>Bottom edge of the screen: <code>project.minY</code>
-</li>
-<li>Random X value on the screen: <code>project.randomX()</code>
-</li>
-<li>Rnadom Y value on the screen: <code>project.randomY()</code>
-</li>
-<li>Width of the screen: <code>project.width</code>
-</li>
-<li>Height of the screen: <code>project.height</code>
-</li>
-</ul>
-
-<h3>
-<a id="project-control-flow" class="anchor" href="#project-control-flow" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Project Control Flow</h3>
-
-<p>There are two types of commands in JavaScript:</p>
-
-<p>1) <strong>Synchronous</strong>: "Do this immediately and then move on when it's done."</p>
-
-<p>2) <strong>Asynchronous</strong>: "Start this immediately, but don't wait till it's done. Just go ahead and move on to the next command immediately after you start this command."</p>
-
-<p>Most commands are synchronous. For example, if-statements, setting or changing variables, and calling most Woof methods like rectangle.move(10) are all synchronous commands.</p>
-
-<p><code>Woof.forever</code> is an example of an asynchronous command. Think about it: if Woof.forever told the computer to wait until it was done before moving on, it would never move on to the next line.</p>
-
-<p><code>Woof.repeat</code>, <code>Woof.repeatUntil</code>, <code>Woof.every</code>, <code>Woof.after</code> are also asynchronous. </p>
-
-<p>This second type allows us to do useful things - like do this 10 times - but it's also confusing because if you want to have something happen after the 10th time, you can't just put it on the line below the <code>Woof.repeat</code>. Why? Because the line below <code>Woof.repeat</code> happens immediately after the asynchronously command <em>starts</em>, not after it ends. </p>
-
-<p>So what you have to do give your "after" code to the async function as it's 3rd parameter and it'll make sure to run it after the async function is really finished. This works for <code>Woof.repeat</code> and <code>Woof.repeatUntil</code>.</p>
-
-<p>Also, be sure not to nest async commands within each other. For example if you want to make an image move in a square for forever, you can't just put four nested repeats inside a forever. Instead you have to use recursion and tell your repeat code to start over only after the 4th repeat is finished finished. (If you put a repeat in a forever, it'll  keep starting new repeats for forever really quickly.)</p>
-
-<ul>
-<li>Repeat 10 times: </li>
-</ul>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">repeat</span>(<span class="pl-c1">10</span>, () <span class="pl-k">=&gt;</span> { 
-  <span class="pl-c1">NAME</span>.<span class="pl-c1">x</span><span class="pl-k">++</span>;
-});</pre></div>
-
-<ul>
-<li>Do something after done repeating:</li>
-</ul>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">repeat</span>(<span class="pl-c1">10</span>, () <span class="pl-k">=&gt;</span> { 
-  <span class="pl-c1">NAME</span>.<span class="pl-c1">x</span><span class="pl-k">++</span>;
-}, () <span class="pl-k">=&gt;</span> {
-  <span class="pl-c1">NAME</span>.<span class="pl-c1">color</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>blue<span class="pl-pds">"</span></span>;
-});</pre></div>
-
-<ul>
-<li>Chaining repeats:</li>
-</ul>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">repeat</span>(<span class="pl-c1">100</span>, () <span class="pl-k">=&gt;</span> {
-  <span class="pl-c1">NAME</span>.<span class="pl-smi">angle</span> <span class="pl-k">=</span> <span class="pl-smi">Woof</span>.<span class="pl-c1">RIGHT</span>;
-  <span class="pl-c1">NAME</span>.<span class="pl-c1">move</span>(<span class="pl-c1">1</span>);
-}, () <span class="pl-k">=&gt;</span> { 
-  <span class="pl-smi">project</span>.<span class="pl-en">repeat</span>(<span class="pl-c1">100</span>, () <span class="pl-k">=&gt;</span> {
-    <span class="pl-c1">NAME</span>.<span class="pl-smi">angle</span> <span class="pl-k">=</span> <span class="pl-smi">Woof</span>.<span class="pl-c1">UP</span>;
-    <span class="pl-c1">NAME</span>.<span class="pl-c1">move</span>(<span class="pl-c1">1</span>);
-  }, () <span class="pl-k">=&gt;</span> { 
-    <span class="pl-smi">project</span>.<span class="pl-en">repeat</span>(<span class="pl-c1">100</span>, () <span class="pl-k">=&gt;</span> {
-      <span class="pl-c1">NAME</span>.<span class="pl-smi">angle</span> <span class="pl-k">=</span> <span class="pl-smi">Woof</span>.<span class="pl-c1">LEFT</span>;
-      <span class="pl-c1">NAME</span>.<span class="pl-c1">move</span>(<span class="pl-c1">1</span>);
-    }, () <span class="pl-k">=&gt;</span> { 
-      <span class="pl-smi">project</span>.<span class="pl-en">repeat</span>(<span class="pl-c1">100</span>, () <span class="pl-k">=&gt;</span> {
-        <span class="pl-c1">NAME</span>.<span class="pl-smi">angle</span> <span class="pl-k">=</span> <span class="pl-smi">Woof</span>.<span class="pl-c1">DOWN</span>;
-        <span class="pl-c1">NAME</span>.<span class="pl-c1">move</span>(<span class="pl-c1">1</span>);
-      });
-    });
-  });
-});</pre></div>
-
-<ul>
-<li>Repeat constantly until (you have to put the condition in "quotes"): </li>
-</ul>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">repeatUntil</span>(<span class="pl-s"><span class="pl-pds">"</span>IMAGE_NAME.y &lt; project.minY<span class="pl-pds">"</span></span>, () <span class="pl-k">=&gt;</span> {
-  <span class="pl-c1">IMAGE_NAME</span>.<span class="pl-c1">y</span> <span class="pl-k">-=</span> <span class="pl-c1">SPEED</span>;
-});</pre></div>
-
-<ul>
-<li>Do seomthing after a <code>repeatUntil</code>:</li>
-</ul>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">repeatUntil</span>(<span class="pl-s"><span class="pl-pds">"</span>IMAGE_NAME.y &lt; project.minY<span class="pl-pds">"</span></span>, () <span class="pl-k">=&gt;</span> {
-  <span class="pl-c1">IMAGE_NAME</span>.<span class="pl-c1">y</span> <span class="pl-k">-=</span> <span class="pl-c1">SPEED</span>;
-}, () <span class="pl-k">=&gt;</span> {
-  <span class="pl-smi">project</span>.<span class="pl-en">stopAll</span>();  
-});</pre></div>
-
-<ul>
-<li>Do this constantly forever: </li>
-</ul>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">forever</span>(() <span class="pl-k">=&gt;</span> { 
-  <span class="pl-c1">CIRCLE_NAME</span>.<span class="pl-smi">radius</span> <span class="pl-k">=</span> <span class="pl-c1">CIRCLE_NAME</span>.<span class="pl-en">distanceTo</span>(<span class="pl-smi">project</span>.<span class="pl-smi">mouseX</span>, <span class="pl-smi">project</span>.<span class="pl-smi">mouseY</span>);
-});</pre></div>
-
-<ul>
-<li>Do this every second: </li>
-</ul>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> timer <span class="pl-k">=</span> <span class="pl-c1">20</span>;
-<span class="pl-k">var</span> timerText <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addText</span>({x<span class="pl-k">:</span> <span class="pl-c1">0</span>, y<span class="pl-k">:</span> <span class="pl-smi">project</span>.<span class="pl-smi">maxY</span> <span class="pl-k">-</span> <span class="pl-c1">20</span>, size<span class="pl-k">:</span> <span class="pl-c1">20</span>, color<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>white<span class="pl-pds">"</span></span>});
-<span class="pl-smi">project</span>.<span class="pl-en">every</span>(<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>second<span class="pl-pds">"</span></span>, () <span class="pl-k">=&gt;</span> {
-  <span class="pl-k">if</span> (timer <span class="pl-k">===</span> <span class="pl-c1">0</span>){ <span class="pl-smi">project</span>.<span class="pl-en">stopAll</span>(); }
-  timer<span class="pl-k">--</span>;
-  <span class="pl-smi">timerText</span>.<span class="pl-c1">text</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>Timer: <span class="pl-pds">"</span></span> <span class="pl-k">+</span> timer;
-});</pre></div>
-
-<ul>
-<li>Do this when a condition (in "quotes") is true. This is a short-hand for a forever-if statement.</li>
-</ul>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">when</span>(<span class="pl-s"><span class="pl-pds">'</span>project.keysDown.includes("LEFT")<span class="pl-pds">'</span></span>, () <span class="pl-k">=&gt;</span> {
-    <span class="pl-smi">rectangle</span>.<span class="pl-c1">x</span> <span class="pl-k">-=</span> <span class="pl-c1">5</span>; 
-});</pre></div>
-
-<ul>
-<li>Do this after one second: <code>project.after(1, "second", () =&gt; {...});</code>
-</li>
-</ul>
-
-<h2>
-<a id="woofimage-wooftext-woofrectangle-and-woofcircle-general-functions" class="anchor" href="#woofimage-wooftext-woofrectangle-and-woofcircle-general-functions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Woof.Image, Woof.Text, Woof.Rectangle and Woof.Circle General Functions</h2>
-
-<p>In Woof you can create <code>Woof.Image</code>, <code>Woof.Text</code>, <code>Woof.Rectangle</code> and <code>Woof.Circle</code>.  The General Functions work on all of them. </p>
-
-<p>When creating a new <code>Woof.Image</code>, <code>Woof.Text</code>, <code>Woof.Rectangle</code> or <code>Woof.Circle</code>, you may use the following parameters:</p>
-
-<div class="highlight highlight-source-js"><pre>  <span class="pl-k">var</span> <span class="pl-c1">IMAGE_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addImage</span>({x<span class="pl-k">:</span> <span class="pl-c1">0</span>, y<span class="pl-k">:</span> <span class="pl-c1">0</span>, angle<span class="pl-k">:</span> <span class="pl-c1">0</span>, rotationStyle<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>ROTATE<span class="pl-pds">"</span></span>, showing<span class="pl-k">:</span> <span class="pl-c1">true</span>});
-  <span class="pl-k">var</span> <span class="pl-c1">TEXT_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addText</span>({x<span class="pl-k">:</span> <span class="pl-c1">0</span>, y<span class="pl-k">:</span> <span class="pl-c1">0</span>, angle<span class="pl-k">:</span> <span class="pl-c1">0</span>, rotationStyle<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>ROTATE<span class="pl-pds">"</span></span>, showing<span class="pl-k">:</span> <span class="pl-c1">true</span>});
-  <span class="pl-k">var</span> <span class="pl-c1">CIRCLE_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addCircle</span>({x<span class="pl-k">:</span> <span class="pl-c1">0</span>, y<span class="pl-k">:</span> <span class="pl-c1">0</span>, angle<span class="pl-k">:</span> <span class="pl-c1">0</span>, rotationStyle<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>ROTATE<span class="pl-pds">"</span></span>, showing<span class="pl-k">:</span> <span class="pl-c1">true</span>});
-  <span class="pl-k">var</span> <span class="pl-c1">RECTANGLE_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addRectangle</span>({x<span class="pl-k">:</span> <span class="pl-c1">0</span>, y<span class="pl-k">:</span> <span class="pl-c1">0</span>, angle<span class="pl-k">:</span> <span class="pl-c1">0</span>, rotationStyle<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>ROTATE<span class="pl-pds">"</span></span>, showing<span class="pl-k">:</span> <span class="pl-c1">true</span>});</pre></div>
-
-<ul>
-<li>Set the X position: <code>NAME.x = 200;</code>
-</li>
-<li>Change the Y position: <code>NAME.y += 10;</code>
-</li>
-<li>Set the angle: <code>NAME.angle = 30;</code>
-</li>
-<li>Set the angle using direction: <code>NAME.angle = Woof.LEFT;</code> </li>
-<li>Turn left: <code>NAME.turnLeft(10);</code>
-</li>
-<li>Turn right: <code>NAME.turnRight(10);</code>
-</li>
-<li>Don't rotate the sprites costume when the angle changes: <code>NAME.setRotationStyle("NO ROTATE");</code>
-</li>
-<li>Rotate left to right when it points in a direction and moves <code>NAME.setRotationStyle("ROTATE LEFT RIGHT");</code>
-</li>
-<li>Hide: <code>NAME.showing = false;</code>
-</li>
-<li>Move in the direction of the angle: <code>NAME.move(10);</code>
-</li>
-<li>Touching another thing?: <code>if (NAME.touching(OTHER_NAME)) { ... }</code>
-</li>
-<li>Mouse over?: <code>if (NAME.mouseOver()) { ... }</code>
-</li>
-<li>Do something on click: <code>NAME.onClick((mouseX, mouseY) =&gt; { ... });</code>
-</li>
-<li>Clicking and holding?: <code>if (NAME.mouseDown()) { ... }</code>
-</li>
-<li>Send to the back layer: <code>NAME.sendToBack();</code>
-</li>
-<li>Send to the front layer: <code>NAME.sendToFront();</code>
-</li>
-<li>Point towards another thing: <code>NAME.pointTowards(OTHER_NAME)</code>
-</li>
-<li>Point towards an X,Y : <code>NAME.pointTowards(project.mouseX, project.mouseY)</code>
-</li>
-<li>Delete: <code>NAME.delete();</code>
-</li>
-<li>Get the distance between two things: <code>NAME.distanceTo(OTHER_NAME);</code>
-</li>
-<li>Get the distance to an X,Y: <code>NAME.distanceTo(X, Y);</code>
-</li>
-<li>Get the width: <code>NAME.width()</code>
-</li>
-<li>Get the height: <code>NAME.height()</code>
-</li>
-</ul>
-
-<h3>
-<a id="woofimage" class="anchor" href="#woofimage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Woof.Image</h3>
-
-<p>In addition to the default parameters (<code>x</code>, <code>y</code>, <code>angle</code>, <code>rotationStyle</code>, and <code>showing</code>), you may use these parameters to create a new image: </p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> <span class="pl-c1">IMAGE_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addImage</span>({url<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>http://www.loveyourdog.com/image3.gif<span class="pl-pds">"</span></span>, imageWidth<span class="pl-k">:</span> <span class="pl-c1">30</span>, imageHeight<span class="pl-k">:</span> <span class="pl-c1">30</span>});</pre></div>
-
-<ul>
-<li>Add another image: <code>IMAGE_NAME.addImageURL("http://www.urdu-english.com/images/lessons/beginner/shapes/shapes-pics/rectangle.png");</code>
-</li>
-<li>Change the image: <code>IMAGE_NAME.image = 0;</code>
-</li>
-<li>Set the width: <code>IMAGE_NAME.imageWidth = 10;</code>
-</li>
-<li>Set the height <code>IMAGE_NAME.imageHeight = 20;</code>
-</li>
-</ul>
-
-<h3>
-<a id="woofcircle" class="anchor" href="#woofcircle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Woof.Circle</h3>
-
-<p>In addition to the default parameters (<code>x</code>, <code>y</code>, <code>angle</code>, <code>rotationStyle</code>, and <code>showing</code>), you may use these parameters to create a new circle: </p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> <span class="pl-c1">CIRCLE_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addCircle</span>({radius<span class="pl-k">:</span> <span class="pl-c1">10</span>, color<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>black<span class="pl-pds">"</span></span>});</pre></div>
-
-<ul>
-<li>Change the radius: <code>CIRCLE_NAME.radius = 15;</code>
-</li>
-<li>Change the color: <code>CIRCLE_NAME.color = "blue";</code>
-</li>
-</ul>
-
-<h2>
-<a id="woofrectangle" class="anchor" href="#woofrectangle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Woof.Rectangle</h2>
-
-<p>In addition to the default parameters (<code>x</code>, <code>y</code>, <code>angle</code>, <code>rotationStyle</code>, and <code>showing</code>), you may use these parameters to create a new rectangle: </p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> <span class="pl-c1">RECTANGLE_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addRectangle</span>({rectangleHeight<span class="pl-k">:</span> <span class="pl-c1">10</span>, rectangleWidth<span class="pl-k">:</span> <span class="pl-c1">20</span>, color<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>pink<span class="pl-pds">"</span></span>});</pre></div>
-
-<ul>
-<li>Change the width: <code>RECTANGLE_NAME.rectangleWidth = 20;</code>
-</li>
-<li>Change the height: <code>RECTANGLE_NAME.rectangleHeight = 45;</code>
-</li>
-<li>Change the color: <code>RECTANGLE_NAME.color = "purple";</code>
-</li>
-</ul>
-
-<h2>
-<a id="woofline" class="anchor" href="#woofline" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Woof.Line</h2>
-
-<p>In addition to the default parameters (<code>angle</code>, <code>rotationStyle</code>, and <code>showing</code>), you may use these parameters to create a new line between (x,y) and (x1, y1): </p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> <span class="pl-c1">LINE_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addLine</span>({x<span class="pl-k">:</span> <span class="pl-k">-</span><span class="pl-c1">100</span>, y<span class="pl-k">:</span> <span class="pl-c1">100</span>, x1<span class="pl-k">:</span> <span class="pl-c1">10</span>, y1<span class="pl-k">:</span> <span class="pl-c1">20</span>, color<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>pink<span class="pl-pds">"</span></span>, lineWidth<span class="pl-k">:</span> <span class="pl-c1">10</span>});</pre></div>
-
-<ul>
-<li>Change the x startpoint: <code>LINE_NAME.x = -100;</code>
-</li>
-<li>Change the y startpoint: <code>LINE_NAME.y = 100;</code>
-</li>
-<li>Change the x endpoint: <code>LINE_NAME.x1 = 10;</code>
-</li>
-<li>Change the y endpoint: <code>LINE_NAME.y1 = 20;</code>
-</li>
-<li>Change the width: <code>LINE_NAME.lineWidth = 5;</code>
-</li>
-<li>Change the color: <code>LINE_NAME.color = "purple";</code>
-</li>
-</ul>
-
-<h3>
-<a id="wooftext" class="anchor" href="#wooftext" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Woof.Text</h3>
-
-<p>In addition to the default parameters (<code>x</code>, <code>y</code>, <code>angle</code>, <code>rotationStyle</code>, and <code>showing</code>), you may use these parameters to create a new text: </p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> <span class="pl-c1">TEXT_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addText</span>({text<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Text<span class="pl-pds">"</span></span>, size<span class="pl-k">:</span> <span class="pl-c1">12</span>, color<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>black<span class="pl-pds">"</span></span>, fontFamily<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>arial<span class="pl-pds">"</span></span>, textAlign<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>center<span class="pl-pds">"</span></span>});</pre></div>
-
-<ul>
-<li>Set the text value: <code>TEXT_NAME.text = "Sample Text";</code>
-</li>
-<li>Set the font size: <code>TEXT_NAME.size = 20;</code>
-</li>
-<li>Set the font color: <code>TEXT_NAME.color = "white";</code>
-</li>
-<li>Set the font color to a hex value: <code>TEXT_NAME.color = "#32CD32";</code>
-</li>
-<li>Set the font family: <code>TEXT_NAME.fontFamily = "arial";</code>
-</li>
-</ul>
-
-<h3>
-<a id="clones" class="anchor" href="#clones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Clones</h3>
-
-<p>1) Create a sprite within a function: </p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">makeClone</span>() {
-  <span class="pl-k">var</span> <span class="pl-c1">CLONE_NAME</span> <span class="pl-k">=</span> <span class="pl-smi">project</span>.<span class="pl-en">addCircle</span> ({radius<span class="pl-k">:</span> <span class="pl-c1">10</span>, color<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>pink<span class="pl-pds">"</span></span>, x<span class="pl-k">:</span> <span class="pl-smi">Woof</span>.<span class="pl-smi">randomX</span>, y<span class="pl-k">:</span> <span class="pl-smi">Woof</span>.<span class="pl-en">randomY</span>()});
-  <span class="pl-smi">project</span>.<span class="pl-en">forever</span>(() <span class="pl-k">=&gt;</span> { 
-    <span class="pl-c1">CLONE_NAME</span>.<span class="pl-c1">x</span><span class="pl-k">++</span>; 
-    <span class="pl-k">if</span> (<span class="pl-c1">CLONE_NAME</span>.<span class="pl-c1">x</span> <span class="pl-k">&gt;</span> <span class="pl-smi">project</span>.<span class="pl-smi">maxX</span>) <span class="pl-c1">CLONE_NAME</span>.<span class="pl-en">delete</span>();
-  });
-}</pre></div>
-
-<p>2)  Call that function however often you want to make a new clone: </p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">every</span>(<span class="pl-c1">4</span>, <span class="pl-s"><span class="pl-pds">"</span>second<span class="pl-pds">"</span></span>, () <span class="pl-k">=&gt;</span> {
-  <span class="pl-en">makeClone</span>();
-});</pre></div>
-
-<h2>
-<a id="helper-functions" class="anchor" href="#helper-functions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Helper Functions</h2>
-
-<p>1) Get a random integer between any two numbers</p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> number <span class="pl-k">=</span> <span class="pl-smi">Woof</span>.<span class="pl-en">randomInt</span>(<span class="pl-c1">10</span>, <span class="pl-c1">20</span>);</pre></div>
-
-<p>2) Repeat something 10 times</p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">Woof</span>.<span class="pl-en">repeat</span>(<span class="pl-c1">10</span>, (<span class="pl-smi">time</span>) <span class="pl-k">=&gt;</span> {
-  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">`</span>I'm going to repeat this <span class="pl-s1"><span class="pl-pse">${</span><span class="pl-c1">10</span><span class="pl-k">-</span>time<span class="pl-pse">}</span></span> more times!<span class="pl-pds">`</span></span>)
-});</pre></div>
-
-<p>3) Get a random integer between any two numbers: <code>Woof.randomInt(10, 20);</code></p>
-
-<p>4) Get the current hour: <code>Woof.hour();</code></p>
-
-<p>5) Get the current hour in military time: <code>Woof.hourMilitary();</code></p>
-
-<p>6) Get the current minute: <code>Woof.minute();</code></p>
-
-<p>7) Get the current second: <code>Woof.second();</code></p>
-
-<p>8) Get the current day of the month (1-31): <code>Woof.dayOfMonth();</code></p>
-
-<p>9) Get the current day of the week (Monday-Sunday): <code>Woof.dayOfWeek();</code></p>
-
-<p>10) Random color: <code>Woof.randomColor()</code></p>
-
-<h2>
-<a id="cloud-data-via-firebase" class="anchor" href="#cloud-data-via-firebase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cloud Data via Firebase</h2>
-
-<p>Cloud data can be used to create high scores, logins, and multiplayer games.</p>
-
-<p>1) Login to <a href="https://firebase.google.com/">Firebase</a> with your Google account.</p>
-
-<p>2) Create a new project.</p>
-
-<p>3) Make reading and writing to your database possible via the Database rules tab.</p>
-
-<p>4) Whitelist your project's domain via the Auth sign-in tab.</p>
-
-<p>5) Copy the Firebase config into your <code>Woof.Project</code>:</p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">firebaseConfig</span>({
-    apiKey<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>AIzaSyAWa4XzsdE5haWBWq4fTef2Ko1dpbsE4qM<span class="pl-pds">"</span></span>,
-    authDomain<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>sample-a81f9.firebaseapp.com<span class="pl-pds">"</span></span>,
-    databaseURL<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>https://sample-a81f9.firebaseio.com<span class="pl-pds">"</span></span>,
-    storageBucket<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span>,
-});</pre></div>
-
-<p>6) Set some data:</p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">setCloud</span>(<span class="pl-s"><span class="pl-pds">"</span>high_score<span class="pl-pds">"</span></span>, <span class="pl-c1">100</span>);
-<span class="pl-smi">project</span>.<span class="pl-en">setCloud</span>(<span class="pl-s"><span class="pl-pds">"</span>player1<span class="pl-pds">"</span></span>, {x<span class="pl-k">:</span> <span class="pl-smi">project</span>.<span class="pl-smi">mouseX</span>, y<span class="pl-k">:</span> <span class="pl-smi">project</span>.<span class="pl-smi">mouseY</span>});</pre></div>
-
-<p>7) Get some data:</p>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">project</span>.<span class="pl-en">getCloud</span>(<span class="pl-s"><span class="pl-pds">"</span>high_score<span class="pl-pds">"</span></span>, <span class="pl-c1">0</span>) <span class="pl-c">// returns 100, with a default of 0</span>
-<span class="pl-smi">project</span>.<span class="pl-en">setCloud</span>(<span class="pl-s"><span class="pl-pds">"</span>player1<span class="pl-pds">"</span></span>, {x<span class="pl-k">:</span> <span class="pl-c1">0</span>, y<span class="pl-k">:</span> <span class="pl-c1">0</span>}) <span class="pl-c">// returns  {x: 14, y: 104}, with a default of {x: 0, y: 0}</span></pre></div>
-
-<h2>
-<a id="learnable-programming" class="anchor" href="#learnable-programming" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="http://worrydream.com/LearnableProgramming/">Learnable Programming</a>
-</h2>
-
-<p>Despite its many <a href="http://worrydream.com/LearnableProgramming/">noted</a> flaws, Processing still remains the dominent graphics programming framework for beginners. Woof strives to solve the same problems as Processing, and be a beginner-friendly graphics frameworks for art, animation and game development, but it also hopes to improve upon Processing's main flaws:</p>
-
-<ul>
-<li>
-<strong>opaque parameters setting</strong> - In Woof, all object properties can be set explicitly with dot notation or as named-parameters in the constructor.</li>
-<li>
-<strong>side effects in render</strong> - In Woof, you can cause state to change in response to events or intervals. You don't have to hook your effectful code into your render method to make things move.</li>
-<li>
-<strong>render</strong> - In Woof, (like ReactJS) we take care of rendering your objects onto the canvas for you. This means you don't even have to think about how your view layer works. It just does.</li>
-<li>
-<strong>hidden state</strong> - In Woof, there's no hidden view-layer state. If you make one circle red, only that circle is red.</li>
-<li>
-<strong>non-modular</strong> - In Woof, because all view-layer state is encapulated into objects, it allows you to easily build modular and functional code without worrying about side effects.</li>
-<li>
-<strong>poor decomposition</strong> - In Woof, you can have infinitely many objects listen to infinitely many events. You don't have to funnel all of your code through the same top-level events that forces you to build tangled code.</li>
-<li>
-<strong>lack of identity / metaphor</strong> - Woof steals Scratch's and Smalltalk's everything-is-an-object-that-you-can-see-on-the-screen metaphor. It also takes the pen, angles, turning and moving athropomorphic metaphors from LOGO.</li>
-</ul>
-
-<h2>
-<a id="showing-off" class="anchor" href="#showing-off" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Showing off</h2>
-
-<ul>
-<li>What takes Pixi.js <a href="http://www.goodboydigital.com/pixijs/examples/8/">80 lines</a>, takes WoofJS <a href="https://jsbin.com/fuheki/edit?js,output">20</a>.</li>
-</ul>
-
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/stevekrouse/WoofJS">Woof</a> is maintained by <a href="https://github.com/stevekrouse">stevekrouse</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
+<html style="height:100%">
+<head>
+  <meta charset="utf-8">
+  <title>WoofJS</title>
+  <script type="text/javascript" src="https://cdn.rawgit.com/showdownjs/showdown/984942e239c9bda522b9c5544aba72647983b3f1/dist/showdown.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="./codemirror-compressed.js"></script>
+  <link rel="stylesheet" href="./codemirror.css">
   
-  </body>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    .CodeMirror {
+        height: 100%;
+        font-size: 13px;
+    }
+    #title {
+        font-size: 140%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    iframe {
+        border: none;
+    } 
+    a {
+        color: cadetblue;
+        text-decoration: none;
+    }
+  </style>
+</head>
+<body style="height:97%">
+    <!--<div id="navbar" style="height:5%; width:100%; display:flex; justify-content:space-between; ">-->
+    <!--    <span id="title">Woof</span>-->
+        <!--<button onclick="runCode()">Run</button>-->
+        <!--<button onclick="TODO">Save</button>-->
+    <!--</div>-->
+        <a target="blank" href="https://github.com/stevekrouse/WoofJS"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+
+    <div id="container" style="height:100%; width:100%; display:flex; flex-direction:row; ">
+        <div id="docs" style="overflow-y: scroll; overflow-x: hidden; height:100%; width: 33%; padding-left: 10px;">
+            
+        </div>
+        
+        <div id="code" style="height:100%; width: 40%;">
+        </div>
+        
+        <div id="output" style=" height:100%; width:36%">
+            <iframe scrolling="no" id="preview" style="height:100%; width:100%"></iframe>
+        </div>
+    </div>
+    
+  <script>
+    // TODO storage
+    // if ('BlocklyStorage' in window && window.location.hash.length > 1) {
+    //   BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+    // }
+    
+   var typeALong = "// The Woof Type-Along\n" +
+"// Follow the instructions to type your first Woof project.\n" +
+"\n" +
+"// This line and all lines beginning with // are comments\n" +
+"\n" +
+"// 1) Type \"new Circle({})\" below this line\n" +
+"//    Tip - Don't start the line with //\n" +
+"\n" +
+"\n" +
+"// 2) Do you see a small black circle in the center of the screen?\n" +
+"//    Why don't we make it bigger?\n" +
+"//    Make the curly braces {} of the Circle: {radius: NUMBER-HERE}\n" +
+"//    Tip - Make sure to do this within the same Circle from above\n" +
+"\n" +
+"// 3) Great! Now, let's change the color:\n" +
+"//      {radius: NUMBER-HERE, color: \"COLOR-HERE\"}\n" +
+"//    Tip - Make sure to put your color name in \"quotes\"\n" +
+"\n" +
+"// 4) Now let's store the circle in a variable\n" +
+"//    Before your new Circle line, type: var CIRCLE-NAME =\n" +
+"//    It should look like: var CIRCLE-NAME = new Circle(...)\n" +
+"\n" +
+"// 5) Now let's make the circle move using its variable name\n" +
+"//    Below this line type:\n" +
+"//      CIRCLE-NAME.move(NUMBER-OF-PIXELS-HERE)\n" +
+"\n" +
+"\n" +
+"\n" +
+"// 6) Did you see it move? Let's make it move some more.\n" +
+"//    Below this line type the following THREE lines:\n" +
+"//      forever(() => {\n" +
+"//\n" +
+"//      })\n" +
+"//    Cut and paste CIRCLE-NAME.move() inside of the forever's middle\n" +
+"\n" +
+"\n" +
+"\n" +
+"\n" +
+"// 7) Let's make the circle stay in bounds\n" +
+"//    Add the following if-statement to your code INSIDE the forever:\n" +
+"//      if (CIRCLE-NAME.x > maxX) {\n" +
+"//        CIRCLE-NAME.angle = LEFT\n" +
+"//      }\n" +
+"//   Add another if-statment to make it stay on the screen?\n";
+	
+	$.get("https://cdn.rawgit.com/stevekrouse/WoofJS/9ca55b59fe139c7dadc9139f9f3bf8278ec9c1fe/README.md", function(text){
+	    text = text.substring(435, text.length)
+	    var converter = new showdown.Converter();
+        var html      = converter.makeHtml(text);
+        document.getElementById('docs').innerHTML = html;
+	})
+	
+    var editor = CodeMirror(document.getElementById('code'), {
+        mode:  "javascript",
+        value: typeALong,
+        lineNumbers: true,
+        theme: "eclipse",
+        
+    });
+    editor.on("change", function(){
+      runCode()
+    });
+    
+    
+    
+    function runCode() {
+        var iframe = document.getElementById('preview');
+        
+        iframe.src = "";
+        setTimeout(function() {
+            var script = iframe.contentWindow.document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "https://cdn.rawgit.com/stevekrouse/WoofJS/dc0d2c74c173a49d8d5e7282b544392bfed8c307/woof.js";
+            iframe.contentWindow.document.body.appendChild(script);
+            
+            script.onload = function() {
+                var evt = document.createEvent('Event');  
+                evt.initEvent('load', false, false);  
+                iframe.contentWindow.dispatchEvent(evt);
+                iframe.contentWindow.eval(editor.getValue());
+            }
+        }, 10)
+    }
+    
+    // // TODO run update
+    
+    // // warn users before navigating away from unsaved changes
+    // window.dirtyChanges = false;
+    // window.onbeforeunload = function (e) {
+    //     if (window.dirtyChanges) {
+    //         return "Would you like to trash this unsaved program?";
+    //     }
+    // };
+    
+  </script>
+  <script>
+      // TODO Google Analytics
+  </script>
+
+</body>
 </html>
