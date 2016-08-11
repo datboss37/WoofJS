@@ -26,6 +26,7 @@
         font-size: 140%;
         margin-left: auto;
         margin-right: auto;
+        /*font-family: "Open Sans-serif";*/
     }
     iframe {
         border: none;
@@ -34,17 +35,28 @@
         color: cadetblue;
         text-decoration: none;
     }
+    #navbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #344D97; 
+      color:white; 
+      height:5%; 
+      width:100%; 
+    }
+    #powered {
+        font-size: 60%;
+    }
   </style>
 </head>
-<body style="height:97%">
-    <!--<div id="navbar" style="height:5%; width:100%; display:flex; justify-content:space-between; ">-->
-    <!--    <span id="title">Woof</span>-->
-        <!--<button onclick="runCode()">Run</button>-->
+<body style="height:100%">
+    <div id="navbar" style="">
+        <span id="title">WoofJS <span id="powered">powered by</span> <img style="width:30px; height 30px;" src="./logo-1.png"></img></span>
+        <a target="blank" href="https://github.com/stevekrouse/WoofJS"><img style="height: 20%; position: absolute; top: 5%; right: 0; border: 0;" src="./learn-more.png"></a>
         <!--<button onclick="TODO">Save</button>-->
-    <!--</div>-->
-        <a target="blank" href="https://github.com/stevekrouse/WoofJS"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+    </div>
 
-    <div id="container" style="height:100%; width:100%; display:flex; flex-direction:row; ">
+    <div id="container" style="height:94%; width:100%; display:flex; flex-direction:row; ">
         <div id="docs" style="overflow-y: scroll; overflow-x: hidden; height:100%; width: 33%; padding-left: 10px;">
             
         </div>
@@ -72,10 +84,9 @@
 "//    Tip - Don't start the line with //\n" +
 "\n" +
 "\n" +
-"// 2) Do you see a small black circle in the center of the screen?\n" +
-"//    Why don't we make it bigger?\n" +
-"//    Make the curly braces {} of the Circle: {radius: NUMBER-HERE}\n" +
-"//    Tip - Make sure to do this within the same Circle from above\n" +
+"// 2) Why don't we make it bigger?\n" +
+"//    Make the Circle's curly braces: {radius: NUMBER-HERE}\n" +
+"//    Tip - Do this within the same Circle from above\n" +
 "\n" +
 "// 3) Great! Now, let's change the color:\n" +
 "//      {radius: NUMBER-HERE, color: \"COLOR-HERE\"}\n" +
@@ -85,7 +96,7 @@
 "//    Before your new Circle line, type: var CIRCLE-NAME =\n" +
 "//    It should look like: var CIRCLE-NAME = new Circle(...)\n" +
 "\n" +
-"// 5) Now let's make the circle move using its variable name\n" +
+"// 5) Make the circle move using its variable name\n" +
 "//    Below this line type:\n" +
 "//      CIRCLE-NAME.move(NUMBER-OF-PIXELS-HERE)\n" +
 "\n" +
@@ -96,17 +107,21 @@
 "//      forever(() => {\n" +
 "//\n" +
 "//      })\n" +
-"//    Cut and paste CIRCLE-NAME.move() inside of the forever's middle\n" +
+"//    Cut and paste CIRCLE-NAME.move() inside the forever\n" +
 "\n" +
 "\n" +
 "\n" +
 "\n" +
 "// 7) Let's make the circle stay in bounds\n" +
-"//    Add the following if-statement to your code INSIDE the forever:\n" +
+"//    Add this if-statement INSIDE the forever:\n" +
 "//      if (CIRCLE-NAME.x > maxX) {\n" +
 "//        CIRCLE-NAME.angle = LEFT\n" +
 "//      }\n" +
-"//   Add another if-statment to make it stay on the screen?\n";
+"//   Add another if to make it stay on the screen\n" +
+"\n" +
+"// 8) To keep working, paste your code to JSBin\n"+
+"//    Clone the following URL to get started:\n"+
+"//    https://jsbin.com/lizuzuz/edit?js,output\n";
 	
 	$.get("https://cdn.rawgit.com/stevekrouse/WoofJS/9ca55b59fe139c7dadc9139f9f3bf8278ec9c1fe/README.md", function(text){
 	    text = text.substring(435, text.length)
