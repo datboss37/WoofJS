@@ -22,11 +22,11 @@
         height: 100%;
         font-size: 13px;
     }
-    #title {
-        font-size: 140%;
+    #title, #title a{
+        font-size: 120%;
         margin-left: auto;
         margin-right: auto;
-        /*font-family: "Open Sans-serif";*/
+        color: white;
     }
     iframe {
         border: none;
@@ -51,7 +51,7 @@
 </head>
 <body style="height:100%">
     <div id="navbar" style="">
-        <span id="title">WoofJS <span id="powered">powered by</span> <img style="width:30px; height 30px;" src="./logo-1.png"></img></span>
+        <span id="title"><a target="blank" href="https://github.com/stevekrouse/WoofJS">WoofJS</a> <span id="powered">powered by</span> <a target="blank" href="http://www.thecodingspace.com/"><img style="width:30px; height 30px;" src="./logo-1.png"></img></a></span>
         <a target="blank" href="https://github.com/stevekrouse/WoofJS"><img style="height: 20%; position: absolute; top: 5%; right: 0; border: 0;" src="./learn-more.png"></a>
         <!--<button onclick="TODO">Save</button>-->
     </div>
@@ -130,6 +130,7 @@
         document.getElementById('docs').innerHTML = html;
 	})
 	
+	var changed = false;
     var editor = CodeMirror(document.getElementById('code'), {
         mode:  "javascript",
         value: typeALong,
@@ -138,9 +139,16 @@
         
     });
     editor.on("change", function(){
-      runCode()
+      changed = true;
+      runCode();
     });
-    
+    window.onbeforeunload = function(e) {
+      if (changed) {
+        var dialogText = 'Make sure to copy and paste your work somewhere safe.';
+        e.returnValue = dialogText;
+        return dialogText; 
+      }
+    };
     
     
     function runCode() {
