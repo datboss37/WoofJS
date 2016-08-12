@@ -6,9 +6,24 @@
   <script type="text/javascript" src="https://cdn.rawgit.com/showdownjs/showdown/984942e239c9bda522b9c5544aba72647983b3f1/dist/showdown.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <script src="./codemirror-compressed.js"></script>
-  <link rel="stylesheet" href="./codemirror.css">
-  
+  <link rel="stylesheet" href="./codemirror/codemirror.css">
+  <script type="text/javascript" src="./codemirror/codemirror.js"></script>
+  <script type="text/javascript" src="./codemirror/javascript.js"></script>
+  <script type="text/javascript" src="./codemirror/closebrackets.js"></script>
+  <script type="text/javascript" src="./codemirror/javascript-hint.js"></script>
+  <script type="text/javascript" src="./codemirror/javascript-lint.js"></script>
+  <script type="text/javascript" src="./codemirror/matchbrackets.js"></script>
+  <script type="text/javascript" src="./codemirror/search.js"></script>
+  <script type="text/javascript" src="./codemirror/searchcursor.js"></script>
+  <script type="text/javascript" src="./codemirror/show-hint.js"></script>
+  <script type="text/javascript" src="./codemirror/sublime.js"></script>
+  <link rel="stylesheet" href="./codemirror/dialog.css">
+  <link rel="stylesheet" href="./codemirror/show-hint.css">
+  <script src="./codemirror/dialog.js"></script>
+  <link rel="stylesheet" href="./codemirror/lint.css">
+  <script src="./codemirror/jshint.min.js"></script>
+  <script src="./codemirror/lint.js"></script>
+
   <style>
     body {
       background-color: #fff;
@@ -150,12 +165,26 @@
         value: typeALong,
         lineNumbers: true,
         theme: "eclipse",
-        
+        keyMap: "sublime",
+        autoCloseBrackets: true,
+        matchBrackets: true,
+        autofocus: true,
+        smartIndent: true,
+        gutters: ["CodeMirror-lint-markers"],
+        lint: {
+          delay: 800, 
+          options: {
+            "esversion": 6,
+            "esnext": true,
+            "asi": true
+          }
+        },
     });
     editor.on("change", function(){
       changed = true;
       runCode();
     });
+    editor.setCursor(7, 0)
     window.onbeforeunload = function(e) {
       if (changed) {
         var dialogText = 'Make sure to copy and paste your work somewhere safe.';
