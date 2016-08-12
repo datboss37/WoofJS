@@ -108,6 +108,7 @@
 "// Follow the instructions to type your first Woof project.\n" +
 "\n" +
 "// This line and all lines beginning with // are comments\n" +
+"setBackdropURL('https://i.imgur.com/RkP7fcR.jpg')\n" +
 "\n" +
 "// 1) Type \"new Circle({})\" below this line\n" +
 "//    Tip - Don't start the line with //\n" +
@@ -137,7 +138,6 @@
 "//\n" +
 "//      })\n" +
 "//    Cut and paste CIRCLE-NAME.move() inside the forever\n" +
-"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -184,7 +184,8 @@
       changed = true;
       runCode();
     });
-    editor.setCursor(7, 0)
+    runCode();
+    editor.setCursor(8, 0)
     window.onbeforeunload = function(e) {
       if (changed) {
         var dialogText = 'Make sure to copy and paste your work somewhere safe.';
