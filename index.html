@@ -152,7 +152,7 @@
 "//    Clone the following URL to get started:\n"+
 "//    https://jsbin.com/lizuzuz/edit?js,output\n";
 	
-	$.get("https://cdn.rawgit.com/stevekrouse/WoofJS/9ca55b59fe139c7dadc9139f9f3bf8278ec9c1fe/README.md", function(text){
+	$.get("https://cdn.rawgit.com/stevekrouse/WoofJS/dea9d1c059daa9650b7d5488c1d77197761d9386/README.md", function(text){
 	    text = text.substring(435, text.length)
 	    var converter = new showdown.Converter();
         var html      = converter.makeHtml(text);
@@ -182,7 +182,7 @@
     });
     editor.on("change", function(){
       changed = true;
-      runCode();
+      debouncedRunCode()
     });
     runCode();
     editor.setCursor(8, 0)
@@ -196,6 +196,7 @@
     
     
     function runCode() {
+      console.log('run')
         var iframe = document.getElementById('preview');
         
         iframe.src = "";
@@ -213,6 +214,21 @@
             }
         }, 10)
     }
+    function debounce(func, wait, immediate) {
+    	var timeout;
+    	return function() {
+    		var context = this, args = arguments;
+    		var later = function() {
+    			timeout = null;
+    			if (!immediate) func.apply(context, args);
+    		};
+    		var callNow = immediate && !timeout;
+    		clearTimeout(timeout);
+    		timeout = setTimeout(later, wait);
+    		if (callNow) func.apply(context, args);
+    	};
+    };
+    var debouncedRunCode = debounce(runCode, 1000, false)
     
   </script>
   <script>
@@ -227,4 +243,4 @@
   </script>
 
 </body>
-</html>
+</html>>
