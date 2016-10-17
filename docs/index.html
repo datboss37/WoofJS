@@ -35,7 +35,7 @@
   <script data-presets="es2015" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.14.0/babel.min.js"></script>
   <style>
     body {
-      background-color: #fff;
+      background-color: #1D1F20 !important;
       font-family: sans-serif;
     }
     h1 {
@@ -60,7 +60,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #344D97; 
+      background-color: rgb(163, 163, 163); 
       color:white; 
       height:55px; 
       width:100%; 
@@ -157,7 +157,8 @@
         <div id="output" style="height:100%; resize: none; flex: 1.2 1 33%;">
             <iframe scrolling="no" id="preview" style="height:100%; width:100%; "></iframe>
         </div>
-        <div id="docs"  style="height:100%; padding-left: 5px; flex: 1.2 1 33%">
+        <div id="docs"  style="height:100%; flex: 1.2 1 33%">
+          <!--padding-left: 5px;-->
             <iframe src="./docs/index.html" id="scratch" style="height:100%; width:100%; flex: 1.2 1 33%">  </iframe> 
         </div>
         
@@ -301,7 +302,7 @@ $('#output-button').click(function() {
       }
     }
     
-    var editorVal = "setBackdropURL('http://i.imgur.com/q6Bqraw.jpg')\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    var editorVal = "setBackdropURL('http://i.imgur.com/jdtSm0l.png')\nvar puppy = new Image({\nurl: 'http://i.imgur.com/prcRVJl.png',\nwidth: 80, \nheight: 80,\n})\nforever(() =>{\npuppy.pointTowards(mouseX, mouseY)\npuppy.move(2)\n})"
     if (getID() != ''){
       editorVal = "// Loading...\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
       firebase.database().ref('/code/' + getID()).limitToLast(1).once('value').then(function(snapshot) {
@@ -365,7 +366,7 @@ $('#output-button').click(function() {
         mode:  "javascript",
         value: editorVal,
         lineNumbers: true,
-        theme: "eclipse",
+        theme: "dracula",
         keyMap: "sublime",
         autoCloseBrackets: true,
         matchBrackets: true,

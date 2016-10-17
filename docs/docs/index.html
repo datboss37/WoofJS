@@ -11,8 +11,9 @@
     
     <title>WoofJS Documentation</title>
 </head>
-<body>
-    <div id="body" :style="{display: 'flex'}" style="display: none; flex-direction: column; align-content: stretch; align-content: center; align-items: center;">
+
+<body style="background-color: #1D1F20; color: white; ">
+    <div id="body" :style="{display: 'flex'}" style="background-color:  #1D1F20; display: none; flex-direction: column; align-content: stretch; align-content: center; align-items: center;">
         <div class="btn-group">
           <input id="searchbar" type="search" class="form-control" placeholder="Search blocks..." v-model="search"></input>
           <span v-show="search != ''" @click="search = ''" id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
@@ -102,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <div v-show="open == 'tutorial'" id="typelist" style="display:none">
+            <div v-show="open == 'tutorial'" id="typelist" style="display:none; color: #212024">
                 <button @click="toggle('tutorial')" class="all highlight">Menu</button>
                 <div id="container">
                     <div id="instructions" style="height:100%; min-width: 90%; padding-left: 5px;">
